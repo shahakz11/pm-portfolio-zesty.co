@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Manager Case Study - Zesty.co</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+    --bg-light: #F9FAFB;
+    --bg-secondary: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --border: #E5E7EB;
+    --primary: #FF5E00;
+    --primary-hover: #E05200;
+    --primary-glow: rgba(255, 94, 0, 0.4);
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --success: #10B981;
+    --success-bg: #D1FAE5;
+    --font-heading: 'Inter, sans-serif', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-secondary);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.background-decor {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: -1;
+    opacity: 0.08;
+}
+.blur-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -50px;
+    right: -50px;
+}
+.blur-2 {
+    width: 350px;
+    height: 350px;
+    background: #06B6D4;
+    bottom: -100px;
+    left: -100px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: var(--bg-light);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    font-family: var(--font-heading);
+}
+
+.logo-brand {
+    color: var(--primary);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-heading);
+}
+
+.btn.primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.btn.primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(254, 94, 0, 0.3);
+}
+
+.btn.large {
+    padding: 14px 36px;
+    font-size: 1.1rem;
+}
+
+.intro-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+.quick-links {
+    display: flex;
+    gap: 20px;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 16px 28px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.quick-link:hover {
+    background: var(--bg-light);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.quick-link .icon {
+    font-size: 2rem;
+}
+
+.quick-link div {
+    display: flex;
+    flex-direction: column;
+}
+
+.quick-link strong {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.quick-link span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.tabs-header {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 25px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 15px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.tab-btn:hover {
+    color: var(--primary);
+}
+
+.tab-btn.active {
+    color: var(--primary);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--primary);
+}
+
+.tab-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 50px;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.content-body {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content-body h1, .content-body h2, .content-body h3 {
+    font-family: var(--font-heading);
+    color: var(--text-main);
+    margin-top: 30px;
+    letter-spacing: -0.3px;
+}
+
+.content-body h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.content-body h2 { font-size: 1.5rem; margin-top: 40px; }
+.content-body h3 { font-size: 1.2rem; }
+
+.content-body p, .content-body li {
+    font-size: 1rem;
+    color: var(--text-main);
+    line-height: 1.7;
+}
+
+.content-body ul, .content-body ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.content-body li {
+    margin-bottom: 8px;
+}
+
+.content-body blockquote {
+    border-left: 4px solid var(--primary);
+    background: var(--bg-secondary);
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+}
+
+.content-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+}
+
+.content-body th, .content-body td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.content-body th {
+    background-color: var(--bg-secondary);
+    font-weight: 700;
+}
+
+.content-body pre {
+    background-color: var(--bg-secondary);
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+}
+
+.content-body code {
+    background-color: var(--bg-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+    </style>
+</head>
+<body>
+    <div class="background-decor blur-1"></div>
+    <div class="background-decor blur-2"></div>
+    
+    <header class="navbar">
+        <div class="logo">
+            <img src="https://logo.clearbit.com/zesty.co" alt="Zesty.co Logo" style="height: 32px; width: auto; object-fit: contain; border-radius: 4px; display: inline-block;" onerror="if(!this.getAttribute('data-tried-fallback')){this.setAttribute('data-tried-fallback','true');this.src='https://www.google.com/s2/favicons?sz=128&domain=zesty.co';}else{this.style.display='none';}">
+            <span class="logo-brand">zesty.co</span> | PM Portfolio Application
+        </div>
+        <div class="actions">
+            <a href="https://stitch.withgoogle.com/projects/17161005869595760747" target="_blank" class="btn primary">View Stitch Prototypes</a>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="intro-card">
+            <h1>Product Management Strategy & Artifacts</h1>
+            <p class="subtitle">Prepared for the Product Manager role at Zesty.co. Complete with Grounded Deep Research, product ideation, detailed PRD, and design layouts.</p>
+            
+            <div class="quick-links">
+                <a href="https://stitch.withgoogle.com/projects/17161005869595760747" target="_blank" class="quick-link">
+                    <span class="icon">🎨</span>
+                    <div>
+                        <strong>Stitch Workspace</strong>
+                        <span>Review screen mockups and design system rules</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="switchTab('deep_research')">1. Deep Research Report</button>
+            <button class="tab-btn" onclick="switchTab('prd')">2. Product Requirement Document (PRD)</button>
+            <button class="tab-btn" onclick="switchTab('design')">3. Design Guidelines</button>
+        </div>
+        
+        <section class="tab-content" id="deep_research">
+            <div class="content-body">
+                <h1>Deep Research Report: Zesty.co (Cloud Cost & Infrastructure Optimization)</h1>
+
+<h2>1. Executive Summary & Value Proposition</h2>
+
+<p><strong>What does the company do?</strong> </p>
+<p>Zesty.co is a cloud management and optimization platform that specializes in automating infrastructure scaling and cost reduction for modern DevOps and FinOps teams. Utilizing artificial intelligence and machine learning algorithms, Zesty dynamically manages Amazon Web Services (AWS) workloads and Kubernetes clusters, adapting resources to match real-time application demands [3-5]. </p>
+
+<p><strong>Core Mission</strong></p>
+<p>Zesty’s core mission is to eliminate global cloud waste, reduce the environmental and financial impact of idle resources, and free engineering teams from the manual burden of managing static infrastructure. </p>
+
+<p><strong>Unique Value Proposition</strong></p>
+<p>Zesty's unique value proposition lies in its <strong>"automation-first"</strong> approach, which provides "hands-off" execution rather than just generating advisory dashboards. Zesty dynamically manages cloud commitments (RIs/Savings Plans) using micro-commitments, auto-scales block storage (EBS) via Zesty Disk, and rightsizes Kubernetes pods (Zesty Kompass) in real-time without pod restarts [10-12]. Furthermore, Zesty operates on a <strong>risk-free, success-based pricing model</strong> for its Commitment Manager, meaning the company only charges a percentage of the actual savings it generates.</p>
+
+<hr>
+
+<h2>2. Target Users & Detailed Personas</h2>
+
+<p><strong>Key Users & Customer Segments</strong></p>
+<p>Zesty targets mid-market to enterprise companies with a significant AWS infrastructure footprint, particularly those running dynamic, high-traffic applications or large-scale Kubernetes environments. The platform requires a minimum monthly on-demand EC2 spend of $7,000.</p>
+
+<p><strong>Persona 1: The Cloud-Native DevOps / Platform Engineering Lead</strong></p>
+<ul>
+<li><strong>Profile:</strong> An engineering leader responsible for ensuring high application availability, managing Kubernetes clusters, and maintaining optimal system performance.</li>
+<li><strong>Pain Points:</strong> Spends 10-15 hours a week manually tuning pod requests and limits, dealing with fragmented cluster resources, and balancing the risk of CPU throttling/Out-of-Memory (OOM) errors against cloud costs. </li>
+<li><strong>Goal:</strong> Wants seamless, automated vertical scaling and rightsizing that does not require pod restarts or service disruptions, allowing the team to focus on feature delivery rather than babysitting infrastructure.</li>
+</ul>
+<p><strong>Persona 2: The Enterprise FinOps / Finance Director</strong></p>
+<ul>
+<li><strong>Profile:</strong> A financial stakeholder tasked with reining in soaring cloud budgets and improving the unit economics of the company's tech stack.</li>
+<li><strong>Pain Points:</strong> Struggles to forecast unpredictable compute and storage needs 1–3 years in advance, leading to either massive unused commitments (waste) or high on-demand rates (overspending).</li>
+<li><strong>Goal:</strong> Desires maximum effective savings rates on AWS (up to 99% coverage) without the financial risk of vendor lock-in or the need for constant manual spreadsheet management [24-26].</li>
+</ul>
+<hr>
+
+<h2>3. User Reviews & Synthesized Pain Points</h2>
+
+<p>Based on verified customer feedback and market analysis, Zesty is highly regarded for its automated cost reduction, but users highlight several specific feature gaps and friction points:</p>
+
+<p><strong>Major Strengths & Positive Feedback:</strong></p>
+<ul>
+<li><strong>"Set It and Forget It" Automation:</strong> Users praise the platform for being entirely hands-off. One user noted it saved 40-50 hours a month in manual cloud cost tuning and reduced Kubernetes infrastructure spend by 24% in the first six months.</li>
+<li><strong>Risk-Free Financial Model:</strong> The buy-back guarantee and success-based fee structure (taking around 25% of generated savings) make Zesty highly attractive and easy to justify to leadership.</li>
+</ul>
+<p><strong>Synthesized Pain Points & Feature Gaps:</strong></p>
+<ul>
+<li><strong>Shallow Financial Reporting Depth:</strong> Zesty excels at execution, but its dashboard and reporting layers lack the depth of broader FinOps platforms. Finance teams struggle to generate highly customized showback, chargeback, or deep cost allocation views without relying on supplemental tools.</li>
+<li><strong>Cloud & Service Limitations:</strong> Zesty is overwhelmingly AWS-centric. Users frequently complain about the lack of robust multi-cloud support (GCP/Azure) and the inability to automatically manage commitments for services like Amazon RDS [31-33].</li>
+<li><strong>Opaque AI/ML Decisions:</strong> Engineers desire better auditability. Because the platform automates background changes, users want deeper event traces, better logging, and advanced technical documentation to understand <em>why</em> certain optimization decisions were made. </li>
+<li><strong>Onboarding Learning Curve:</strong> While core setup is fast, mastering the platform's advanced Kubernetes features (like Kompass, HiberScale, and AI algorithms) poses a steep learning curve for new developers, requiring heavy reliance on Zesty's customer support.</li>
+</ul>
+<hr>
+
+<h2>4. Key Markets & Competitor Landscaping</h2>
+
+<p>The Cloud Cost Management and FinOps market is rapidly evolving, with global cloud infrastructure spending projected to surpass $830 billion by 2026. Zesty competes primarily in <strong>Automated Cloud Optimization</strong>, <strong>Commitment Management</strong>, and <strong>Kubernetes Rightsizing</strong>.</p>
+
+<h3>Competitor Matrix</h3>
+
+<p>| Feature / Metric | <strong>Zesty.co</strong> | <strong>nOps</strong> | <strong>ProsperOps</strong> | <strong>CAST AI</strong> |</p>
+<p>|:--- |:--- |:--- |:--- |:--- |</p>
+<p>| <strong>Primary Focus</strong> | Automated AWS Commitments & K8s Resource Tuning | Broad AWS automation & Spot optimization | Autonomous RI/Savings Plan trading | K8s node autopilot & container optimization |</p>
+<p>| <strong>Cloud Coverage</strong> | Mostly AWS (EC2, EBS, EKS) | AWS, Azure, GCP | AWS, Azure | AWS, Azure, GCP (K8s only) |</p>
+<p>| <strong>Pricing Model</strong> | Modular: Usage-based (K8s) + Savings-share (25% entry) | Savings-share or flat-fee | Savings-share (no upfront) | Savings-share (K8s compute) |</p>
+<p>| <strong>Key Strengths</strong> | Zesty Disk (EBS auto-scaling), In-Place Pod Resizing, Micro-commitments | 100% utilization guarantee, Deep Spot AI management | Best-in-class ESR (Effective Savings Rate), zero over-commitment risk | Deep K8s automation, real-time node scaling, multi-cloud |</p>
+<p>| <strong>Weaknesses</strong> | Limited multi-cloud, weak enterprise financial reporting (showback) | Complex setup for large environments, heavily AWS-focused | Narrow scope (rate optimization only, no usage waste tuning) | Kubernetes-only focus, lacks broad FinOps governance |</p>
+
+<hr>
+
+<h2>5. Existing Design & Platform Analysis</h2>
+
+<p>While specific brand hex codes and typography are not explicitly detailed in the provided sources, the platform's aesthetic, architecture, and user experience can be synthesized from technical documentation and reviews:</p>
+
+<ul>
+<li><strong>Platform Integrations:</strong> Zesty integrates seamlessly with AWS (native block storage, EC2, CloudWatch, CloudTrail), and common Kubernetes tooling (HPA, VPA, KEDA, ArgoCD, Prometheus, and Grafana) [57-59].</li>
+<li><strong>UX/UI Design Language:</strong> The platform utilizes a "Dashboard" approach characterized by users as <strong>"clean and informative"</strong>. The interface is designed around high-level visibility, utilizing visual components like <strong>Savings Tiles</strong> (highlighting Commitment Manager, Zesty Disk, Unused Resources, and Recommendations) and an <strong>EBS Cost Breakdown</strong> (featuring donut charts and cost-over-time trend lines) to distill complex billing data into actionable insights [61-63].</li>
+<li><strong>Interaction Paradigm:</strong> The design champions a <strong>"set it and forget it"</strong> philosophy. Users spend minimal time in the UI, as the agentic system requires only initial read-only IAM configurations and operates autonomously in the background.</li>
+</ul>
+<hr>
+
+<h2>6. Emerging Technology & Strategic Opportunities</h2>
+
+<p>To overcome current user friction points, expand market share, and double growth, Zesty should leverage the following emerging technologies and strategic initiatives:</p>
+
+<ul>
+<li><strong>Generative AI for FinOps Reporting (Addressing the Reporting Gap):</strong></li>
+<p>Currently, Zesty uses deterministic machine learning for forecasting. By integrating a Generative AI "FinOps Assistant" (a massive trend in 2026 for querying cost data via natural language), Zesty can bridge the gap in its financial reporting. This would allow enterprise users to instantly generate complex showback reports, trace automated scaling events, and query billing anomalies without needing a heavy UI overhaul.</p>
+<li><strong>Expansion via Third-Party APIs (Addressing Service Limitations):</strong></li>
+<p>Zesty's lack of support for managed databases (like Amazon RDS) and multi-cloud environments (Azure/GCP) is a major competitive disadvantage against tools like nOps and CloudHealth. Zesty should build out its API framework to ingest billing and utilization data from Azure, GCP, and Snowflake, extending its micro-commitment algorithms beyond AWS EC2.</p>
+<li><strong>Shift-Left Tooling & Pre-Deployment Analysis (Addressing Developer Visibility):</strong></li>
+<p>The industry is actively shifting toward "pre-deployment architecture costing". Zesty can integrate its insights directly into developer workflows (e.g., IDE plugins, GitHub Actions, or local DBs) to forecast the cost of a Kubernetes configuration <em>before</em> it is merged. Giving developers proactive visibility aligns perfectly with Zesty's goal of unburdening DevOps. </p>
+<li><strong>Advanced Auditability & Operator Customization:</strong></li>
+<p>To address complaints about "black box" automation, Zesty should implement advanced logging mechanisms and Webhooks. This would push granular event traces (e.g., <em>why</em> Zesty Disk expanded an EBS volume) directly to corporate Slack channels or Data Warehouses, building trust and transparency for enterprise architects.</p>
+</ul>
+            </div>
+        </section>
+        
+        <section class="tab-content hidden" id="prd">
+            <div class="content-body">
+                <p>Here is a comprehensive product brainstorm and Product Requirement Document (PRD) based on the synthesized Deep Research Report.</p>
+
+<h3>1. Feature Brainstorming: Taking Zesty.co to the Next Level</h3>
+
+<p>Based on the synthesized pain points and emerging technology opportunities, here are 3 unique features that can elevate Zesty’s market position:</p>
+
+<ul>
+<li><strong>Feature Option 1: Zesty Gen-AI FinOps Assistant (The "Showback & Trace Engine")</strong></li>
+<ul>
+<li><em>The Concept:</em> An intelligent, natural language interface built directly into the Zesty dashboard. </li>
+<li><em>The Solution:</em> It directly addresses the "Shallow Financial Reporting Depth" and "Opaque AI/ML Decisions" pain points. Users can ask questions like, <em>"Generate a showback report for the marketing department's Kubernetes clusters,"</em> or <em>"Why did Zesty Disk expand the EBS volume on server X yesterday?"</em> It bridges the gap between Zesty's deterministic ML forecasting and user-friendly Gen-AI querying without requiring a heavy UI overhaul.</li>
+</ul>
+<li><strong>Feature Option 2: Zesty Shift-Left Cost Forecaster (Pre-Deployment Integration)</strong></li>
+<ul>
+<li><em>The Concept:</em> A developer-facing tool (IDE plugin and GitHub Action) that forecasts cloud costs before code is merged.</li>
+<li><em>The Solution:</em> It tackles the "Onboarding Learning Curve" and unburdens DevOps engineers by providing proactive, pre-deployment architecture costing. Engineers gain immediate visibility into the financial impact of their Kubernetes configurations <em>before</em> deployment, solving the disconnect between infrastructure changes and soaring cloud budgets.</li>
+</ul>
+<li><strong>Feature Option 3: Zesty Omni-Cloud API Connector & Webhook Hub</strong></li>
+<ul>
+<li><em>The Concept:</em> An advanced integration framework that extends Zesty's micro-commitment algorithms beyond AWS and adds deep event webhook capabilities.</li>
+<li><em>The Solution:</em> It directly addresses the "Cloud & Service Limitations" by expanding support to multi-cloud environments (Azure, GCP) and managed databases (Amazon RDS). Additionally, it pushes granular event traces to corporate Slack channels or Data Warehouses, solving the "black box" auditability complaints.</li>
+</ul>
+</ul>
+<hr>
+
+<h3>2. Feature Selection & Business Case</h3>
+
+<p><strong>Selected Feature:</strong> Zesty Gen-AI FinOps Assistant (The "Showback & Trace Engine")</p>
+
+<p><strong>Rationale & Business Case:</strong></p>
+<ul>
+<li><strong>Customer Incentives:</strong> The two biggest complaints from target personas are that Zesty's AI decisions are "opaque" (a major friction point for the <strong>DevOps Lead</strong>) and that the platform lacks the reporting depth required for complex cost allocation (a dealbreaker for the <strong>Finance Director</strong>). This single feature solves <em>both</em> personas' primary pain points. </li>
+<li><strong>Product Logic:</strong> Zesty already possesses the underlying deterministic ML data and usage metrics. By layering a Generative AI interface on top of this existing data, Zesty can instantly translate complex backend scaling events and billing data into digestible, natural-language answers and custom reports.</li>
+<li><strong>Assumptions:</strong> We assume that enterprise users are willing to interact with a chat-based interface for reporting, and that Zesty's backend data is structured cleanly enough to be queried reliably by an LLM.</li>
+<li><strong>Business Impact:</strong> This closes the critical feature gap between Zesty and legacy FinOps competitors like Apptio Cloudability and CloudHealth, who currently win enterprise deals based on their deep showback/chargeback reporting capabilities.</li>
+</ul>
+<hr>
+
+<h3>3. Product Requirement Document (PRD): Zesty Gen-AI FinOps Assistant</h3>
+
+<h4>Document Version & Owner Info</h4>
+<ul>
+<li><strong>Document Version:</strong> 1.0</li>
+<li><strong>Product Owner:</strong> Lead Product Manager, FinOps & Reporting</li>
+<li><strong>Target Release:</strong> Q4 2026</li>
+</ul>
+<h4>Objective & Vision</h4>
+<p><strong>Vision:</strong> To completely eliminate the "black box" of automated cloud optimization and make enterprise-grade financial reporting accessible to anyone via natural language.</p>
+<p><strong>Objective:</strong> Build and integrate a Generative AI FinOps Assistant into the Zesty platform that allows users to instantly generate complex showback reports, query billing anomalies, and trace automated scaling events without requiring a complex UI overhaul.</p>
+
+<h4>Target Audience</h4>
+<ul>
+<li><strong>Primary:</strong> The Enterprise FinOps / Finance Director. They need highly customized showback, chargeback, and deep cost allocation views without relying on supplemental spreadsheet tools.</li>
+<li><strong>Secondary:</strong> The Cloud-Native DevOps / Platform Engineering Lead. They require deep auditability, advanced logging, and an understanding of <em>why</em> Zesty's AI made specific optimization decisions in the background.</li>
+</ul>
+<h4>User Stories</h4>
+<ol>
+<li><strong>As a Finance Director</strong>, I want to type "Show me a cost allocation breakdown for the engineering team's Kubernetes clusters for Q3," so that I can generate instant showback reports without exporting data.</li>
+<li><strong>As a Platform Engineering Lead</strong>, I want to ask "Why did Zesty Disk expand the EBS volume on the production database yesterday?" so that I can audit and trust the AI's autonomous decisions [1-3].</li>
+<li><strong>As a DevOps Engineer</strong>, I want the assistant to explain the platform's advanced Kubernetes features (like Kompass and HiberScale) so that I can overcome the steep onboarding learning curve.</li>
+<li><strong>As a Finance Director</strong>, I want the assistant to dynamically generate Savings Tiles and EBS Cost Breakdowns (e.g., donut charts and cost-over-time trend lines) in the chat window so I can easily visualize billing anomalies.</li>
+<li><strong>As an Enterprise Architect</strong>, I want to configure the assistant to push granular event traces to our corporate Slack channel automatically, so my team has proactive visibility into background changes.</li>
+</ol>
+<h4>Functional Requirements & Specs</h4>
+<ul>
+<li><strong>Natural Language Query Engine:</strong> The system must accurately parse user prompts and translate them into queries against Zesty’s deterministic machine learning forecasting and billing databases.</li>
+<li><strong>Automated Showback Generation:</strong> The assistant must be able to group costs by tags, namespaces, or accounts and output exportable financial reports directly in the chat UI.</li>
+<li><strong>Scaling Event Tracer:</strong> The assistant must have access to granular event logs. When asked about a specific resource (e.g., an EC2 instance or EBS volume), it must detail the exact timestamp, metric trigger, and action taken by Zesty's automation.</li>
+<li><strong>Dynamic Visualizations:</strong> The chat UI must support the rendering of existing Zesty UI components (Savings Tiles, donut charts, trend lines) within the conversational flow.</li>
+<li><strong>Slack/Webhook Integration:</strong> The tool must allow users to set up natural-language rules (e.g., "Alert the #devops Slack channel every time Zesty Disk auto-scales a volume by more than 50GB").</li>
+</ul>
+<h4>Non-Functional Requirements</h4>
+<ul>
+<li><strong>Security & Privacy:</strong> The LLM must adhere strictly to the read-only IAM configurations already established by Zesty. Customer billing data must be strictly isolated; the LLM must not train on cross-tenant data. </li>
+<li><strong>Performance:</strong> Natural language queries regarding cost allocation or event tracing must return accurate results in under 5 seconds to maintain the "Dashboard" feel of the platform.</li>
+<li><strong>Scalability:</strong> The reporting backend must scale to support environments with massive AWS infrastructure footprints (e.g., enterprises with millions of monthly log events).</li>
+</ul>
+<h4>Success Metrics (KPIs)</h4>
+<ul>
+<li><strong>North Star Metric:</strong> <strong>Time-to-Report.</strong> (Reduction in the time it takes a Finance Director to generate a monthly chargeback report, aiming for &lt; 1 minute).</li>
+<li><strong>Adoption Goal:</strong> 40% of Daily Active Users (DAU) engage with the Gen-AI Assistant at least once per session within 3 months of launch.</li>
+<li><strong>Auditability KPI:</strong> A 30% reduction in customer support tickets related to "understanding automated changes" or "opaque AI decisions".</li>
+</ul>
+<h4>Release Plan & Phases</h4>
+<ul>
+<li><strong>Phase 1 (MVP - "The FinOps Explainer"):</strong> </li>
+<ul>
+<li>Launch an in-app chat interface focused purely on <strong>event tracing and onboarding</strong>.</li>
+<li><em>Scope:</em> Allow DevOps users to query documentation, understand advanced K8s features, and ask basic questions about automated scaling events (e.g., "Why did this scale?").</li>
+</ul>
+<li><strong>Phase 2 (Expansion - "The Showback Engine"):</strong></li>
+<ul>
+<li>Integrate complex billing and cost allocation data. </li>
+<li><em>Scope:</em> Enable Finance users to generate and export complex showback/chargeback reports and dynamically render UI charts in the chat window.</li>
+</ul>
+<li><strong>Phase 3 (Enterprise Auditability):</strong></li>
+<ul>
+<li>Launch Webhooks and Slack integration.</li>
+<li><em>Scope:</em> Push granular event traces directly to third-party communication tools and Data Warehouses to ensure total enterprise transparency.</li>
+</ul>
+</ul>
+            </div>
+        </section>
+        
+        <section class="tab-content hidden" id="design">
+            <div class="content-body">
+                <h2>Design System Strategy & Prototypes</h2>
+                <p>An interactive high-fidelity mockup has been generated within Stitch based on the product requirements. You can review the structure of the layout, responsive constraints, and colors using the workspace link below:</p>
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="https://stitch.withgoogle.com/projects/17161005869595760747" target="_blank" class="btn large primary">Open Stitch Interactive Editor</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.remove('hidden');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
